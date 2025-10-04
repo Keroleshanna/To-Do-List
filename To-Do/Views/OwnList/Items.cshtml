@@ -1,0 +1,75 @@
+﻿@model List<To_Do.Models.AllToDoItem>;
+@{
+	ViewBag.Title = "Your To-Do";
+}
+
+<h2>Welcome @ViewBag.herName.Name : Your own list for @ViewBag.ListName.Name</h2>
+<p>Here is your to-do list:</p>
+<a class="btn btn-primary" asp-controller="AllItems" asp-action="Create" asp-route-id="@ViewBag.ListName.Id">Create New Item</a>
+<table class="table align-middle mb-5 bg-white">
+	<thead class="bg-light">
+		<tr>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Deedline</th>
+			<th>File</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<div class="d-flex align-items-center">
+						<div class="ms-3">
+							<p class="text-muted mb-0">@item.Title</p>
+						</div>
+					</div>
+				</td>
+				<td>
+					<p class="fw-normal mb-1">@item.Description</p>
+				</td>
+				<td>
+					@{
+						var today = DateOnly.FromDateTime(DateTime.Now);
+						var myDate = item.Deedline;
+
+						int daysDiff = myDate.DayNumber - today.DayNumber;
+
+						if (daysDiff <= 2)
+						{
+							<span class="badge bg-danger rounded-pill">@item.Deedline</span>
+						}
+						else if (daysDiff >= 2)
+						{
+							<span class="badge bg-primary rounded-pill">@item.Deedline</span>
+						}
+					}
+				</td>
+				<td>
+					@{
+						var extension = System.IO.Path.GetExtension(item.File)?.ToLower();
+					}
+
+					@if (extension == ".pdf")
+					{
+						<a href="@item.File" target="_blank">Open File</a>
+					}
+					else
+					{
+						<img src="@item.File" alt="Image" style="max-width:200px;" />
+					}
+				</td>
+				<td>
+					<a class="btn btn-primary btn-sm btn-rounded" asp-controller="AllItems" asp-action="Update" asp-route-id="@item.Id">
+						Update
+					</a>
+					<a type="submit" class="btn btn-danger btn-sm btn-rounded" asp-controller="AllItems" asp-action="Delete" asp-route-id="@item.Id">
+						Delete
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

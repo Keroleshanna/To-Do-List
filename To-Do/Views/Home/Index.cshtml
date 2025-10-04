@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Masthead-->
+<div class="masthead bg-primary text-white text-center mb-5">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="~/Templet/img/avataaars.svg" alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Do you want to create TO-Do List</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a class="btn btn-danger btn-lg px-4" asp-controller="Registration" asp-action="Register">
+                Create New To-Do Item
+            </a>
+            <a class="btn btn-info btn-lg px-4" asp-controller="Registration" asp-action="Login">
+                Login To Your To-Do List
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+

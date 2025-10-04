@@ -1,0 +1,43 @@
+﻿@model AllToDoItem
+
+@{
+    ViewBag.Title = "Update The Item";
+}
+
+<div class="container">
+    <form style="width: 26rem;" asp-action="Update" method="post" enctype="multipart/form-data">
+        <!-- Title input -->
+        <div class="form-outline mb-4">
+            <input type="text" class="form-control" asp-for="Title" value="@Model.Title"/>
+            <label class="form-label" >Title</label>
+        </div>
+
+        <!-- Description input -->
+        <div class="form-outline mb-4">
+            <textarea class="form-control" rows="4" asp-for="Description" value="@Model.Description"></textarea>
+            <label class="form-label" asp-for="Description">Description</label>
+        </div>
+
+        <!-- DeadLine input -->
+        <div class="form-group mb-3">
+            <label class="form-label" asp-for="Deedline">Deadline</label>
+            <input type="date" required class="form-control"
+                   asp-for="Deedline"
+                   value="@Model.Deedline.ToString("yyyy-MM-dd")"
+                   min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+
+            <span asp-validation-for="Deedline" class="text-danger"></span>
+        </div>
+
+        <!-- File input -->
+        <div class="form-outline mb-4">
+            <input type="file" class="form-control" name="uploadedFile" value="@Model.File" />
+            <label class="form-label">File</label>
+        </div>
+
+        <input type="hidden" asp-for="OwnToDoListId" />
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+    </form>
+</div>

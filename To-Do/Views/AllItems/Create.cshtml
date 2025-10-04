@@ -1,0 +1,43 @@
+﻿@model To_Do.Models.AllToDoItem
+
+@{
+	ViewBag.Title = "Create new Item";
+}
+
+<div class="container">
+	<form style="width: 26rem;" asp-action="Create" method="post" enctype="multipart/form-data">
+		<!-- Title input -->
+		<div class="form-outline mb-4">
+			<input type="hidden" class="form-control" value="@ViewBag.ownList.Id" />
+		</div>
+
+		<div class="form-outline mb-4">
+			<input type="text" class="form-control" required asp-for="Title" />
+			<label class="form-label" asp-for="Title">Title</label>
+		</div>
+
+		<!-- Description input -->
+		<div class="form-outline mb-4">
+			<textarea class="form-control" rows="4" asp-for="Description"></textarea>
+			<label class="form-label" asp-for="Description">Description</label>
+		</div>
+
+		<!-- DeadLine input -->
+		<div class="form-group mb-3">
+			<label class="form-label" asp-for="Deedline">Deadline</label>
+			<input type="date" required class="form-control" asp-for="Deedline" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+			<span asp-validation-for="Deedline" class="text-danger"></span>
+		</div>
+
+
+		<!-- File input -->
+		<div class="form-outline mb-4">
+			<input type="file" class="form-control" name="uploadedFile" />
+			<label class="form-label">File</label>
+		</div>
+
+
+		<!-- Submit button -->
+		<button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+	</form>
+</div>

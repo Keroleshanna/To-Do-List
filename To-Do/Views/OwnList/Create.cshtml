@@ -1,0 +1,49 @@
+﻿@model User;
+@{
+	ViewData["Title"] = "Create To-Do List";
+}
+
+<section class="container mt-5 mb-5">
+	<h1>Welcome @Model.Name  :)</h1>
+	<h3>This is Your First In Our Website Please Create Your Own List</h3>
+	<form asp-action="Create" method="post">
+		<div data-mdb-input-init class="form-outline mb-4">
+			<input type="hidden" id="form2Example17" class="form-control form-control-lg" name="@Model" />
+
+		</div>
+		<div data-mdb-input-init class="form-outline mb-4">
+			<input type="text" required id="form2Example17" class="form-control form-control-lg" name="name" />
+			<label class="form-label" for="form2Example17">List Name</label>
+		</div>
+
+		<div data-mdb-input-init class="form-outline mb-4">
+			<input type="text" required id="form2Example17" class="form-control form-control-lg" name="description" />
+			<label class="form-label" for="form2Example17">Description</label>
+		</div>
+
+		<div class="form-group mb-3">
+			<label class="form-label">Start From today</label>
+			<input type="@DateTime.Now" id="futureDate" class="form-control" name="date" value="@DateTime.Now" />
+			<span class="text-danger has-validation"></span>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</section>
+<script>
+	// Get today's date in YYYY-MM-DD format
+	let today = new Date().toISOString().split("T")[0];
+	document.getElementById("futureDate").setAttribute("min", today);
+</script>
+
+
+@if (ViewBag.Error != null)
+{
+	<script>
+		alert("@ViewBag.Error");
+	</script>
+}
+@section Scripts {
+	<!-- validation scripts -->
+	<partial name="_ValidationScriptsPartial" />
+}
